@@ -1,0 +1,298 @@
+monitor=, preferred, auto, 1
+monitor=,preferred,auto,1,mirror,DP-1
+
+exec-once=$HOME/.config/hypr/autostart
+
+$term = kitty
+$browser = firefox
+$gmail = firefox --new-instance -P app "https://mail.google.com/" --class appProfile
+$editor = code
+$explorer = nemo
+$music = g4music
+$notepad = code --profile notepad --unity-launch ~/Templates
+$launcher = tofi-drun -c ~/.config/tofi/tofi.launcher.conf
+$launcher_alt = tofi-run -c ~/.config/tofi/tofi.launcher.conf
+# $launcher = wofi --show drun -n
+# $launcher_alt = wofi --show run -n
+#$discord = discord
+
+env = LIBVA_DRIVER_NAME,nvidia
+env = XDG_SESSION_TYPE,wayland
+env = GBM_BACKEND,nvidia-drm
+env = __GLX_VENDOR_LIBRARY_NAME,nvidia
+env = WLR_NO_HARDWARE_CURSORS,1
+env = GTK_THEME,Dracula
+general {
+    gaps_in = 5
+    gaps_out = 5
+    border_size = 1
+    col.active_border = rgba(cba6f7ff) rgba(89b4faff) rgba(94e2d5ff) 10deg
+    col.inactive_border = 0xff313244
+    cursor_inactive_timeout = 5
+}
+
+
+decoration {
+    rounding = 10
+   blur {
+        enabled           = true
+        size              = 9
+        passes            = 1	
+        new_optimizations = true
+    }
+    active_opacity = 0.85
+    inactive_opacity = 0.8
+    fullscreen_opacity = 1
+
+    dim_inactive = false
+    dim_strength = 0.05
+
+    drop_shadow = true
+    shadow_ignore_window = true
+    shadow_range = 80
+    shadow_render_power = 4
+    col.shadow = 0x99161925
+    col.shadow_inactive = 0x55161925
+    # Your blur "amount" is blur_size * blur_passes, but high blur_size (over around 5-ish) will produce artifacts.
+    # if you want heavy blur, you need to up the blur_passes.
+    # the more passes, the more you can up the blur_size without noticing artifacts.
+
+    # Blurring layerSurfaces
+    # blurls = gtk-layer-shell
+    # blurls = waybar
+    # blurls = lockscreen
+    blurls = rofi
+    blurls = wofi
+    blurls = launcher
+}
+
+
+animations {
+    enabled = true
+    # bezier = overshot, 0.05, 0.9, 0.1, 1.1
+    bezier = overshot, 0.13, 0.99, 0.29, 1.1
+    bezier = bound, 0.68, -0.2, 0.265, 1.75
+    bezier = Out,  0.10, 0.9, 0.1, 1.05
+    animation = windows, 1, 4, overshot, slide
+    animation = border, 1, 10, default
+    animation = fade, 1, 10, default
+    animation = workspaces, 1, 12, overshot, slide
+    animation = windowsMove,1 , 10, overshot,slide
+    animation = windowsIn, 1, 10, overshot, slide
+    animation = windowsOut, 1, 12, Out, slide
+}
+
+
+input {
+    # kb_file =
+    kb_layout = us
+    # kb_variant =
+    # kb_model =
+    # kb_options = ctrl:swapcaps
+    # kb_rules =
+    sensitivity = 0.5 # for mouse cursor
+
+    follow_mouse = 1
+
+    scroll_method = 2fg
+
+    touchpad {
+        natural_scroll = false
+        disable_while_typing = true
+        tap-to-click = true
+    }
+}
+
+
+dwindle {
+    pseudotile = true # enable pseudotiling on dwindle
+    force_split = 0
+    preserve_split = true
+}
+
+
+master {
+
+}
+
+
+thimgestures {
+    workspace_swipe = true
+    workspace_swipe_invert = false
+    workspace_swipe_fingers = 3
+}
+
+
+misc {
+    disable_hyprland_logo = true
+
+    focus_on_activate = true
+
+    enable_swallow = true
+    swallow_regex = ^(kitty)$
+}
+
+
+binds {
+    allow_workspace_cycles = true
+}
+
+
+custom {
+    rules {
+        # for windows named/classed as abc and xyz
+        # windowrule = move 69 420, abc
+        # windowrule = pseudo, abc
+        # windowrule = monitor 0, xyz
+        # windowrule = tile, xy
+
+        windowrule = float, title:^(fly_is_kitty)$
+        windowrule = size 800 500, title:^(fly_is_kitty)$
+        windowrule = move center, title:^(fly_is_kitty)$
+        windowrule = animation slide, title:^(fly_is_kitty)$
+
+        windowrule = float, title:^(all_is_kitty)$
+
+        windowrule = float, title:^(clock_is_kitty)$
+        windowrule = size 325 180, title:^(clock_is_kitty)$
+
+        windowrule = float, title:^(donut_is_kitty)$
+        windowrule = size 660 486, title:^(donut_is_kitty)$
+
+        windowrule = animation popin, title:^(donut_is_kitty)$
+
+        windowrule = float,^(rlr)$
+        windowrule = float,^(pavucontrol)$
+        windowrule = float,^(blueman-manager)$
+        windowrule = float,^(nm-connection-editor)$
+        windowrule = float,^(mediainfo-gui)$
+        windowrule = tile,^(neovide)$
+        windowrulev2 = float, class:^(firefox)$, title:^(Firefox — Sharing Indicator)$
+        windowrulev2 = float, class:^(nemo)$, title:^(.*Properties)$
+        windowrulev2 = float, class:^(Nemo-preview-start)$
+
+        windowrule = float,^(com.github.neithern.g4music)$
+        windowrule = size 670 635,^(com.github.neithern.g4music)$
+        windowrule = move center,^(com.github.neithern.g4music)$
+
+        windowrulev2 = animation slide, class:^(wofi)$
+        windowrulev2 = move 100%-433 53, class:^(wofi)$, title:^(clippick)$
+
+        windowrulev2 = animation popin, class:^(wlogout)$, title:^(wlogout)$
+        windowrulev2 = float, class:^(wlogout)$, title:^(wlogout)$
+    }
+
+    binds {
+        # Mouse binds
+        bindm = SUPER, mouse:272, movewindow
+        bindm = SUPER, mouse:273, resizewindow
+
+        bind = SUPER, mouse_down, workspace, e-1
+        bind = SUPER, mouse_up, workspace, e+1
+
+2        # Kitty binds
+        bind = SUPER, SPACE, exec, $term
+
+        # Screenshot/scripts binds
+        bind = Super_SHIFT, A, exec,~/.scripts/screenshot_full.sh
+        bind = SUPER_SHIFT, S, exec,~/.scripts/screenshot.sh
+        bind = SUPER_SHIFT, C, exec,~/.scripts/color-picker.sh
+        # Application binds
+        bind = SUPER, W, killactive,
+	bind = ALT , Space ,exec , ~/.config/rofi/launchers/type-2/launcher.sh
+
+        # Wofi and notification binds
+        #bind = SUPER, V, exec, pkill wofi || cliphist list | wofi --dmenu -p clippick -l top_right -x -15 -y 10 -n | cliphist decode | wl-copy
+        bind = SUPER, V, exec, pkill tofi || cliphist list | tofi -c ~/.config/tofi/tofi.clip.conf | cliphist decode | wl-copy
+        bind = SUPER, N, exec, swaync-client -t -sw
+        bind = SUPER, Q, exec, pkill tofi || $launcher
+
+        # Other dispatchers
+        bind = Ctrl, Tab, cyclenext
+        bind = SUPER, S, fullscreen,
+        bind = SUPER_SHIFT, S, fakefullscreen,
+        bind = SUPER, D, pseudo,
+        bind = SUPER, A, togglefloating,
+        bind = SUPER_SHIFT, D, togglegroup,
+        bind = SUPER, tab, changegroupactive,
+
+        # Reload waybar
+	    bind = SUPER_SHIFT, R, exec, ~/.scripts/launch_waybar
+
+        # Logout screen, lock, exit
+        bind = SUPER, escape, exec, ~/.config/wlogout/launch.sh
+        bind = SUPER, L, exec,~/.scripts/lock
+        bind = SUPER_SHIFT, escape, exec, playerctl --all-players stop; hyprctl dispatch exit none
+
+
+        # Move window with SUPER + Shift + arrow keys
+        #      [↑]
+        # [←] [↓] [→]
+        bind = SUPER_SHIFT, left, movewindow, l
+        bind = SUPER_SHIFT, right, movewindow, r
+        bind = SUPER_SHIFT, up, movewindow, u
+        bind = SUPER_SHIFT, down, movewindow, d
+
+        # Move window focus with SUPER + arrow keys
+        #      [↑]
+        # [←] [↓] [→]
+        bind = SUPER, left, movefocus, l
+        bind = SUPER, right, movefocus, r
+        bind = SUPER, up, movefocus, u
+        bind = SUPER, down, movefocus, d
+
+        # Move To a workspaces
+        bind = SUPER, 1, workspace, 1
+        bind = SUPER, 2, workspace, 2
+        bind = SUPER, 3, workspace, 3
+        bind = SUPER, 4, workspace, 4
+        bind = SUPER, 5, workspace, 5
+        bind = SUPER, 6, workspace, 6
+        bind = SUPER, 7, workspace, 7
+        bind = SUPER, 8, workspace, 8
+        bind = SUPER, 9, workspace, 9
+
+        # Move windows between workspaces
+        bind = SUPER_SHIFT, 1, movetoworkspace, 1
+        bind = SUPER_SHIFT, 2, movetoworkspace, 2
+        bind = SUPER_SHIFT, 3, movetoworkspace, 3
+        bind = SUPER_SHIFT, 4, movetoworkspace, 4
+        bind = SUPER_SHIFT, 5, movetoworkspace, 5
+        bind = SUPER_SHIFT, 6, movetoworkspace, 6
+        bind = SUPER_SHIFT, 7, movetoworkspace, 7
+        bind = SUPER_SHIFT, 8, movetoworkspace, 8
+        bind = SUPER_SHIFT, 9, movetoworkspace, 9
+
+        # Use this to get thw XF86 bind (FN + Fx combination) for your keyboard
+        # xev | grep -A2 --line-buffered '^KeyRelease' | sed -n '/keycode /s/^.*keycode \([0-9]*\).* (.*, \(.*\)).*$/\1 \2/p'
+
+        # Volume Control
+        binde = , XF86AudioRaiseVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ +1%
+        binde = , XF86AudioLowerVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ -1%
+        bind = , XF86AudioMute, exec, pactl set-sink-mute @DEFAULT_SINK@ toggle
+        bind = , XF86AudioMicMute, exec, pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+        # Media Control
+        bind = , XF86AudioMedia, exec, playerctl play-pause
+        bind = , XF86AudioPlay, exec, playerctl play-pause
+	bind =  Super , X , exec, playerctl play-pause
+	bind = Super , Z , exec , playerctl previous
+	bind = Super , C , exec , playerctl next
+        bind = , XF86AudioStop, exec, playerctl stop
+        bind = , XF86AudioPrev, exec, playerctl previous
+        bind = , XF86AudioNext, exec, playerctl next
+
+        # Brightness Control
+        binde = , XF86MonBrightnessUp, exec, light -A 1
+        binde = , XF86MonBrightnessDown, exec, light -U 1
+
+        # Screensaver key
+        bind = , XF86ScreenSaver, exec,~/.scripts/lock
+
+
+	#trigger when the switch is turning on
+        # bindl = , switch:on:Lid Switch, exec, hyprctl keyword monitor ", 1920x1080@60, auto, 1"
+        # trigger when the switch is turning off
+        bindl = , switch:off:Lid Switch, exec, playerctl --all-players stop; ~/.scripts/lock; sleep 0.25s; systemctl suspend
+    }
+}
